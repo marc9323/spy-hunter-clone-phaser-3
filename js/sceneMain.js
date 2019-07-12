@@ -55,7 +55,7 @@ class SceneMain extends Phaser.Scene {
 
         // create a button
 
-        var fireText = { color: 'red', fontSize: 20 };
+        var fireText = { color: 'black', fontSize: 30 };
         var flatButton = new FlatButton({
             scene: this,
             key: 'button1',
