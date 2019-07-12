@@ -46,5 +46,37 @@ class AlignGrid {
         this.graphics.strokePath();
     }
 
-    placeAt(xx, yy) {}
+    // pass the xx, yy to pinpoint which cell to place inside
+    placeAt(xx, yy, obj) {
+        // calc position based on cell width and cell height
+        var x2 = this.cw * xx + this.cw / 2;
+        var y2 = this.ch * yy + this.ch / 2;
+
+        obj.x = x2;
+        obj.y = y2;
+    }
+
+    placeAtIndex(index, obj) {
+        // calc row
+        var yy = Math.floor(index / this.config.cols);
+        var xx = index - yy * this.config.cols;
+
+        this.placeAt(xx, yy, obj);
+    }
+
+    showNumbers() {
+        this.show();
+        var count = 0;
+        for (var i = 0; i < this.config.rows; i++) {
+            for (var j = 0; j < this.config.cols; j++) {
+                var numText = this.scene.add.text(0, 0, count, {
+                    color: '#ff0000'
+                });
+                numText.setOrigin(0.5, 0.5);
+                this.placeAtIndex(count, numText);
+
+                count++;
+            }
+        }
+    }
 }

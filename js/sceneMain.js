@@ -16,6 +16,10 @@ class SceneMain extends Phaser.Scene {
         this.load.image('cone', 'images/cone.png');
         this.load.image('barrier', 'images/barrier.png');
 
+        // button images
+        this.load.image('button1', 'images/ui/buttons/2/1.png');
+        this.load.image('button2', 'images/ui/buttons/2/5.png');
+
         // delete
         this.load.image('face', 'images/face.png');
     }
@@ -33,12 +37,50 @@ class SceneMain extends Phaser.Scene {
         this.road.x = game.config.width / 2;
         this.road.makeLines();
 
-        /// delete temp
-        var gridConfig = { rows: 5, cols: 5, scene: this };
-        var alignGrid = new AlignGrid(gridConfig);
-        alignGrid.show();
+        this.alignGrid = new AlignGrid({ scene: this, rows: 5, cols: 5 });
+        this.alignGrid.showNumbers();
 
-        this.face = this.add.sprite(0, 0, 'face');
+        // place scorebox according to grid
+        this.alignGrid.placeAtIndex(4, this.sb);
+
+        /// delete temp
+        // var gridConfig = { rows: 5, cols: 5, scene: this };
+        // var alignGrid = new AlignGrid(gridConfig);
+        // alignGrid.show();
+
+        // this.face = this.add.sprite(0, 0, 'face');
+        // alignGrid.placeAtIndex(17, this.face);
+        // alignGrid.showNumbers();
+        // Align.scaleToGameW(this.face, 0.2);
+
+        // create a button
+
+        var fireText = { color: 'red', fontSize: 20 };
+        var flatButton = new FlatButton({
+            scene: this,
+            key: 'button1',
+            text: 'Fire',
+            x: 100,
+            y: 100,
+            event: 'button_pressed',
+            params: 'fire_lasers',
+            textConfig: fireText
+        });
+
+        var flatButton = new FlatButton({
+            scene: this,
+            key: 'button2',
+            text: 'Self Destruct',
+            x: 240,
+            y: 300,
+            event: 'button_pressed',
+            params: 'self_destruct'
+        });
+
+        emitter.on('button_pressed', this.buttonPressed, this);
+    }
+    buttonPressed(params) {
+        console.log(params);
     }
     update() {
         // game loop
