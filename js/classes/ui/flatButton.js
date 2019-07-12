@@ -1,3 +1,10 @@
+// sample config object: {
+//     scene: this,
+//     key: 'button1',
+//     text: 'start',
+//     event: 'start_game'
+// }
+
 class FlatButton extends Phaser.GameObjects.Container {
     constructor(config) {
         if (!config.scene) {

@@ -24,8 +24,9 @@ class SceneMain extends Phaser.Scene {
         this.load.image('face', 'images/face.png');
     }
     create() {
-        emitter = new Phaser.Events.EventEmitter();
-        controller = new Controller();
+        // delete
+        // emitter = new Phaser.Events.EventEmitter();
+        // controller = new Controller();
 
         // add scorebox
         this.sb = new ScoreBox({ scene: this });
